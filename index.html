@@ -2,11 +2,681 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>初めてのWebページ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PORTFOLIO | Optical & Acoustic Craft</title>
+  <!-- Google Fonts: 気品ある明朝体と精密機械のようなサンセリフ体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@200;300;400;500&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #080808;
+      --bg-secondary: #111111;
+      --text-primary: #f5f5f5;
+      --text-secondary: #888888;
+      --text-muted: #555555;
+      --border-color: #222222;
+      --accent-line: #ffffff;
+      --font-serif: 'Cormorant Garamond', 'Shippori Mincho', serif;
+      --font-sans: 'Inter', 'Noto Sans JP', sans-serif;
+      --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-mid: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ----------------------------------
+       Header / Navigation
+    ---------------------------------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 4vw;
+      background: rgba(8, 8, 8, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    .brand-logo {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+
+    .brand-logo span {
+      color: var(--text-secondary);
+      font-weight: 200;
+      margin-left: 8px;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 36px;
+    }
+
+    nav a {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      transition: color var(--transition-mid);
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background-color: var(--text-primary);
+      transition: width var(--transition-mid);
+    }
+
+    nav a:hover {
+      color: var(--text-primary);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ----------------------------------
+       Hero Section
+    ---------------------------------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 120px 4vw 8vh;
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2000&q=85');
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%) contrast(1.15) brightness(0.35);
+      transform: scale(1.05);
+      animation: heroZoom 12s ease-out forwards;
+      z-index: -1;
+    }
+
+    @keyframes heroZoom {
+      to { transform: scale(1); }
+    }
+
+    .hero-meta {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hero-meta::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--text-secondary);
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+      max-width: 900px;
+      margin-bottom: 32px;
+    }
+
+    .hero-sub {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-description {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      letter-spacing: 0.05em;
+    }
+
+    .spec-badge {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    /* ----------------------------------
+       Common Section Grid (SIGMA Style)
+    ---------------------------------- */
+    .section-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-sidebar {
+      padding: 64px 4vw;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .section-index {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .section-label {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      margin-top: 8px;
+    }
+
+    .section-content {
+      padding: 64px 6vw;
+    }
+
+    /* ----------------------------------
+       01. Philosophy Section
+    ---------------------------------- */
+    .philosophy-lead {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+      line-height: 1.6;
+      font-weight: 400;
+      margin-bottom: 40px;
+      letter-spacing: 0.04em;
+    }
+
+    .philosophy-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 48px;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 2;
+    }
+
+    /* ----------------------------------
+       02. Selected Works (Gallery)
+    ---------------------------------- */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      background-color: var(--border-color);
+      gap: 1px;
+    }
+
+    .work-item {
+      position: relative;
+      background-color: var(--bg-primary);
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .work-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.08) brightness(0.8);
+      transition: transform var(--transition-slow), filter var(--transition-slow);
+    }
+
+    .work-item:hover img {
+      transform: scale(1.04);
+      filter: grayscale(15%) contrast(1.05) brightness(0.95);
+    }
+
+    .work-overlay {
+      position: absolute;
+      inset: 0;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
+      opacity: 0.9;
+      transition: opacity var(--transition-mid);
+    }
+
+    .work-spec {
+      align-self: flex-end;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: var(--text-primary);
+      background: rgba(8, 8, 8, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      backdrop-filter: blur(4px);
+    }
+
+    .work-info h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .work-info p {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    /* ----------------------------------
+       03. Gear & Specifications
+    ---------------------------------- */
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .spec-table tr {
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color var(--transition-mid);
+    }
+
+    .spec-table tr:first-child {
+      border-top: 1px solid var(--border-color);
+    }
+
+    .spec-table tr:hover {
+      background-color: var(--bg-secondary);
+    }
+
+    .spec-table th,
+    .spec-table td {
+      padding: 24px 16px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .spec-table th {
+      width: 28%;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    .spec-table td {
+      font-size: 0.92rem;
+      color: var(--text-primary);
+      letter-spacing: 0.03em;
+    }
+
+    .spec-sub {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ----------------------------------
+       Footer / Contact
+    ---------------------------------- */
+    footer {
+      padding: 80px 4vw 48px;
+      background-color: var(--bg-primary);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .footer-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      letter-spacing: 0.03em;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .social-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      border-bottom: 1px solid transparent;
+      padding-bottom: 4px;
+      transition: all var(--transition-mid);
+    }
+
+    .social-links a:hover {
+      color: var(--text-primary);
+      border-bottom-color: var(--text-primary);
+    }
+
+    .footer-bottom {
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* ----------------------------------
+       Scroll Fade-in Animation
+    ---------------------------------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ----------------------------------
+       Responsive
+    ---------------------------------- */
+    @media (max-width: 900px) {
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+      .section-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 40px 6vw 24px;
+      }
+      .works-grid {
+        grid-template-columns: 1fr;
+      }
+      nav ul {
+        gap: 20px;
+      }
+      .spec-table th, .spec-table td {
+        display: block;
+        width: 100%;
+        padding: 12px 0;
+      }
+      .spec-table th {
+        padding-bottom: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>こんにちは、世界！</h1>
-  <p>これは簡単なHTMLのサンプルコードです。</p>
-  <a href="https://www.google.com">Googleへ移動する</a>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="brand-logo">TSUCHIYA <span>EDITION | JP</span></a>
+    <nav>
+      <ul>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#works">Works</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-meta">Optical Precision &amp; Acoustic Resonance</div>
+    <h1 class="hero-title">Capturing the unseen silence between light and sound.</h1>
+    <div class="hero-sub">
+      <p class="hero-description">
+        光と影の階調、そして空間を震わせる音の余韻。精密な機材と確かな手仕事を通じて、日常の瞬間をシネマティックな記憶へと昇華させる。
+      </p>
+      <div class="spec-badge">35mm F1.4 DG | ISO 100 | 1/250s</div>
+    </div>
+  </section>
+
+  <!-- 01. Philosophy Section -->
+  <section id="philosophy" class="section-grid">
+    <div class="section-sidebar">
+      <div>
+        <div class="section-index">01 / Concept</div>
+        <h2 class="section-label">Philosophy</h2>
+      </div>
+      <div class="section-index">Art / Contemporary</div>
+    </div>
+    <div class="section-content reveal">
+      <p class="philosophy-lead">
+        「妥協なき描写力と、表現者の熱量をそのまま閉じ込めること。」
+      </p>
+      <div class="philosophy-body">
+        <p>
+          どれほど優れた光学機器や音響機材であっても、それは表現のための道具に過ぎません。しかし、極限まで磨き上げられた道具は、時に作り手の想像を超えた瞬間を引き寄せます。
+        </p>
+        <p>
+          ファインダー越しに覗く1ミリ単位のピント面から、スタジオの空気を切り裂くギターの倍音まで。細部に宿る美しさを追求し、静謐でありながら熱を帯びた作品を制作しています。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02. Selected Works (Gallery) -->
+  <section id="works" class="section-grid">
+    <div class="section-sidebar">
+      <div>
+        <div class="section-index">02 / Archive</div>
+        <h2 class="section-label">Works</h2>
+      </div>
+      <div class="section-index">Stills &amp; Motion</div>
+    </div>
+    <div class="works-grid reveal">
+      <!-- Work 1 -->
+      <article class="work-item">
+        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80" alt="Monochrome Landscape">
+        <div class="work-overlay">
+          <span class="work-spec">50mm F1.4 | 1/1000s</span>
+          <div class="work-info">
+            <h3>Silent Ridge</h3>
+            <p>Still Photography / Landscape</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Work 2 -->
+      <article class="work-item">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" alt="Studio Session">
+        <div class="work-overlay">
+          <span class="work-spec">24mm F1.8 | 24fps Cinema</span>
+          <div class="work-info">
+            <h3>Amplified Soul</h3>
+            <p>Live Session / Sound &amp; Visual</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Work 3 -->
+      <article class="work-item">
+        <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1200&q=80" alt="Night Architecture">
+        <div class="work-overlay">
+          <span class="work-spec">85mm F1.4 | ISO 400</span>
+          <div class="work-info">
+            <h3>Urban Geometry</h3>
+            <p>Architectural Study</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Work 4 -->
+      <article class="work-item">
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80" alt="Camera Rig">
+        <div class="work-overlay">
+          <span class="work-spec">35mm F1.2 | Anamorphic</span>
+          <div class="work-info">
+            <h3>Monochrome Rig</h3>
+            <p>Cinematography / Gear Build</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 03. Specs / Profile & Gear -->
+  <section id="specs" class="section-grid">
+    <div class="section-sidebar">
+      <div>
+        <div class="section-index">03 / Architecture</div>
+        <h2 class="section-label">Specifications</h2>
+      </div>
+      <div class="section-index">System &amp; Profile</div>
+    </div>
+    <div class="section-content reveal">
+      <table class="spec-table">
+        <tbody>
+          <tr>
+            <th>Creator / Role</th>
+            <td>
+              Hodai Tsuchiya
+              <span class="spec-sub">Photographer / Videographer / Guitarist</span>
+            </td>
+          </tr>
+          <tr>
+            <th>Optical &amp; Cinema System</th>
+            <td>
+              Full-Frame Mirrorless System &amp; Modular Cinema Rig
+              <span class="spec-sub">Matte Box System / V-Mount Power Supply / Quick-Release Architecture / Shotgun Audio Capture</span>
+            </td>
+          </tr>
+          <tr>
+            <th>Sound &amp; Guitar System</th>
+            <td>
+              Electric Guitars / Custom Pedalboard &amp; Amp Head System
+              <span class="spec-sub">High-Grade Patch Routing / Studio Rehearsal &amp; Live Performance Setup</span>
+            </td>
+          </tr>
+          <tr>
+            <th>Core Disciplines</th>
+            <td>
+              Still Photography / Cinematography / Sound Engineering / Web Design
+              <span class="spec-sub">Monochrome Grading, Live Music Documentation, Hardware Customization</span>
+            </td>
+          </tr>
+          <tr>
+            <th>Base Location</th>
+            <td>
+              Yamanashi / Tokyo, Japan
+              <span class="spec-sub">Available for remote &amp; on-location projects</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Footer / Contact -->
+  <footer id="contact">
+    <div class="footer-top reveal">
+      <div>
+        <div class="section-index" style="margin-bottom: 12px;">04 / Inquiry</div>
+        <h2 class="footer-heading">Let's build something timeless.</h2>
+      </div>
+      <div class="social-links">
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://youtube.com/" target="_blank" rel="noopener">YouTube</a>
+        <a href="mailto:your-email@example.com">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 TSUCHIYA EDITION. All Rights Reserved.</div>
+      <div>Crafted with Precision</div>
+    </div>
+  </footer>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
